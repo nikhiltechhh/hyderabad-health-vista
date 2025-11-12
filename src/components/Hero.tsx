@@ -1,85 +1,156 @@
 import { Button } from "@/components/ui/button";
-import { Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, TrendingUp, Award } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 md:pt-20">
-      {/* Background Image with Overlay */}
+    <section id="home" className="relative min-h-screen flex items-center pt-24 md:pt-32 pb-12">
+      {/* Background Image with Advanced Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt="Medical Shop"
+          alt="Professional Medical Shop in Hyderabad"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/97 via-background/90 to-background/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/50" />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <MapPin className="h-4 w-4" />
-            <span>Serving Hyderabad with Care</span>
+        <div className="max-w-4xl">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <MapPin className="h-4 w-4" />
+              <span>Hyderabad's #1 Medical Shop</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+              <Award className="h-4 w-4" />
+              <span>ISO Certified</span>
+            </div>
           </div>
 
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
             Your Trusted{" "}
-            <span className="text-primary">Healthcare Partner</span>
+            <span className="text-primary relative inline-block">
+              Healthcare
+              <svg
+                className="absolute -bottom-2 left-0 w-full"
+                height="12"
+                viewBox="0 0 200 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 10C50 2 150 2 198 10"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  className="text-primary/30"
+                />
+              </svg>
+            </span>{" "}
+            <br className="hidden sm:block" />
+            Partner
           </h1>
 
-          {/* Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-            Quality medicines, expert consultation, and fast delivery across
-            Hyderabad. Your health is our priority, available 24/7 for your
-            medical needs.
+          {/* Enhanced Description */}
+          <p className="text-lg sm:text-xl text-muted-foreground mb-4 leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 max-w-2xl">
+            Experience healthcare excellence with quality medicines, expert consultation, 
+            and lightning-fast delivery across Hyderabad. Your health is our priority.
           </p>
 
+          {/* Stats Bar */}
+          <div className="flex flex-wrap items-center gap-6 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-accent" />
+              <div>
+                <p className="text-2xl font-bold text-foreground">10,000+</p>
+                <p className="text-xs text-muted-foreground">Happy Customers</p>
+              </div>
+            </div>
+            <div className="h-12 w-px bg-border" />
+            <div className="flex items-center gap-2">
+              <Clock className="h-5 w-5 text-accent" />
+              <div>
+                <p className="text-2xl font-bold text-foreground">24/7</p>
+                <p className="text-xs text-muted-foreground">Available</p>
+              </div>
+            </div>
+            <div className="h-12 w-px bg-border hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-accent" />
+              <div>
+                <p className="text-2xl font-bold text-foreground">5+</p>
+                <p className="text-xs text-muted-foreground">Locations</p>
+              </div>
+            </div>
+          </div>
+
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-            <Button size="lg" className="text-base">
-              <Phone className="mr-2 h-5 w-5" />
-              Call Now
+          <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+            <Button size="lg" className="text-base group relative overflow-hidden">
+              <span className="relative z-10 flex items-center">
+                <Phone className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                Call Now - Free Consultation
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
             </Button>
-            <Button size="lg" variant="outline" className="text-base">
-              View Products
+            <Button size="lg" variant="outline" className="text-base group">
+              View 5000+ Products
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </Button>
           </div>
 
-          {/* Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-            <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4 hover:shadow-lg transition-shadow">
-              <Clock className="h-6 w-6 text-primary mb-2" />
-              <h3 className="font-semibold text-foreground mb-1">24/7 Open</h3>
+          {/* Enhanced Info Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-700">
+            <div className="group bg-card/90 backdrop-blur-md border border-border rounded-xl p-5 hover:shadow-2xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Clock className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-1 text-lg">24/7 Emergency</h3>
               <p className="text-sm text-muted-foreground">
-                Always available for emergencies
+                Round-the-clock service for urgent medical needs
               </p>
             </div>
 
-            <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4 hover:shadow-lg transition-shadow">
-              <Phone className="h-6 w-6 text-primary mb-2" />
-              <h3 className="font-semibold text-foreground mb-1">
-                Fast Delivery
+            <div className="group bg-card/90 backdrop-blur-md border border-border rounded-xl p-5 hover:shadow-2xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Phone className="h-6 w-6 text-accent" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-1 text-lg">
+                30-Min Delivery
               </h3>
               <p className="text-sm text-muted-foreground">
-                Within 30 minutes in Hyderabad
+                Lightning-fast delivery across Hyderabad
               </p>
             </div>
 
-            <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4 hover:shadow-lg transition-shadow">
-              <MapPin className="h-6 w-6 text-primary mb-2" />
-              <h3 className="font-semibold text-foreground mb-1">
-                Multiple Locations
+            <div className="group bg-card/90 backdrop-blur-md border border-border rounded-xl p-5 hover:shadow-2xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Award className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-1 text-lg">
+                Verified Products
               </h3>
               <p className="text-sm text-muted-foreground">
-                Across Hyderabad city
+                100% genuine medicines with quality guarantee
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
     </section>
   );
 };
