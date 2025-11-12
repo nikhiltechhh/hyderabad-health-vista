@@ -12,7 +12,7 @@ const WhyChooseUs = () => {
       icon: Award,
       title: "Licensed & Certified",
       description: "Fully licensed pharmacy with ISO certification and government approvals.",
-      stat: "ISO 9001:2015",
+      stat: "ISO ",
     },
     {
       icon: TrendingUp,
@@ -41,7 +41,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-gradient-to-b from-background to-muted/30">
+    <section id="about" className="py-20 md:py-32 bg-gradient-to-b from-background to-muted/30 -mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
             Why Choose Us
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Hyderabad's Most Trusted Medical Shop
+            Anantapur's Most Trusted Medical Shop
           </h2>
           <p className="text-lg text-muted-foreground">
             Since 2010, we've been committed to providing quality healthcare products and services with unmatched reliability and customer care.
@@ -93,7 +93,7 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-card border border-border rounded-2xl p-8 md:p-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-card border border-border rounded-2xl p-8 md:p-12 ">
           <div className="text-center">
             <p className="text-4xl md:text-5xl font-bold text-primary mb-2">13+</p>
             <p className="text-muted-foreground">Years of Service</p>

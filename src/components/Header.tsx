@@ -40,17 +40,17 @@ const Header = () => {
         <div className="hidden md:flex items-center justify-between py-2 border-b border-border/30 text-sm">
           <div className="flex items-center gap-6">
             <a
-              href="tel:+919876543210"
+              href="tel:+91550140897"
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>+91 98765 43210</span>
+              <span>+91 9550140897</span>
             </a>
-            <span className="text-muted-foreground">Open 24/7</span>
+            <span className="text-muted-foreground">Open 8AM - 10PM</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-primary font-medium">
-              Free Delivery in Hyderabad
+              Delivery available within a 5 km radius.
             </span>
           </div>
         </div>
@@ -61,18 +61,18 @@ const Header = () => {
           <a href="#home" className="flex items-center gap-3 group">
             <div className="relative">
               <img
-                src={logoPlaceholder}
+                src="https://i.ibb.co/PGhZ3S2m/tejamedical.png"
                 alt="Medical Shop Logo"
-                className="h-10 w-10 md:h-12 md:w-12 object-contain transition-transform duration-300 group-hover:scale-110"
+                className="h-10 w-10 md:h-16 md:w-16 object-contain transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                MediCare Plus
+                Teja Medical
               </span>
               <span className="text-xs text-muted-foreground hidden sm:block">
-                Trusted Healthcare - Hyderabad
+                Trusted Healthcare - Anantapur
               </span>
             </div>
           </a>
@@ -90,27 +90,29 @@ const Header = () => {
               </a>
             ))}
             <div className="flex items-center gap-3 ml-4">
-              <Button variant="ghost" size="icon" className="relative">
+              {/* <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 h-5 w-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
                   0
                 </span>
-              </Button>
+              </Button> */}
+             <a href="tel:+919550140897">
               <Button size="sm" className="gap-2">
                 <Phone className="h-4 w-4" />
                 Order Now
               </Button>
+            </a>
             </div>
           </nav>
 
           {/* Mobile Actions */}
           <div className="flex items-center gap-2 lg:hidden">
-            <Button variant="ghost" size="icon" className="relative">
+            {/* <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-[10px] rounded-full flex items-center justify-center">
                 0
               </span>
-            </Button>
+            </Button> */}
             <button
               onClick={toggleMenu}
               className="p-2 text-foreground hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
@@ -160,6 +162,7 @@ const Header = () => {
               </a>
             ))}
             <div className="pt-4 space-y-2 px-4">
+             <a href="tel:+919550140897" className="w-full">
               <Button
                 variant="default"
                 className="w-full gap-2 animate-in fade-in slide-in-from-top-2"
@@ -168,11 +171,12 @@ const Header = () => {
                 <Phone className="h-4 w-4" />
                 Order Now
               </Button>
+            </a>
               <a
-                href="tel:+919876543210"
+                href="tel:+919550140897 "
                 className="block text-center text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                +91 98765 43210
+                +91 9550140897
               </a>
             </div>
           </nav>

@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import Products from "@/components/Products";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Contact from "@/components/Contact";
+import WhatsAppFloat from "@/components/WhatsappFloat";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -11,10 +12,11 @@ const Index = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <Hero />
-      <Services />
       <Products />
+      <Services />
       <WhyChooseUs />
       <Contact />
+      <WhatsAppFloat />
       <Footer />
     </div>
   );

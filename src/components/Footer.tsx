@@ -13,17 +13,15 @@ const Footer = () => {
 
   const services = [
     { label: "Prescription Medicines", href: "#services" },
-    { label: "OTC Products", href: "#products" },
+    { label: "Surgical Items", href: "#products" },
     { label: "Health Consultation", href: "#services" },
     { label: "Home Delivery", href: "#services" },
   ];
 
   const locations = [
-    "Jubilee Hills",
-    "Banjara Hills",
-    "HITEC City",
-    "Madhapur",
-    "Gachibowli",
+    "Door No. 15/654,",
+    "Sanjeeva reddy circle,",
+     "Anantapur-515001."
   ];
 
   return (
@@ -35,47 +33,30 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <img
-                src={logoPlaceholder}
+                src="https://i.ibb.co/PGhZ3S2m/tejamedical.png"
                 alt="MediCare Plus Logo"
                 className="h-12 w-12 object-contain brightness-0 invert"
               />
               <div>
-                <h3 className="text-xl font-bold">MediCare Plus</h3>
-                <p className="text-sm text-background/70">Hyderabad</p>
+                <h3 className="text-xl font-bold">Teja Medical</h3>
+                <p className="text-sm text-background/70">Anantapur</p>
               </div>
             </div>
             <p className="text-background/80 mb-6 leading-relaxed">
-              Your trusted healthcare partner since 2010. Providing quality medicines and expert care across Hyderabad.
+              Your trusted healthcare partner. Providing quality medicines and expert care across Anantapur.
             </p>
             <div className="flex gap-3">
-              <a
-                href="#"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
+             
+             <a
+                href="https://www.instagram.com/tejamedical/?igsh=OXV0czF0NndoeDR5#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-background/10 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
+              
             </div>
           </div>
 
@@ -122,22 +103,22 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-6">Contact Us</h4>
             <div className="space-y-4 mb-6">
               <a
-                href="tel:+919876543210"
+                href="tel:+919550140897"
                 className="flex items-start gap-3 text-background/80 hover:text-primary transition-colors group"
               >
                 <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="font-medium">+91 98765 43210</p>
+                  <p className="font-medium">+91 9550140897</p>
                   <p className="text-sm">24/7 Emergency Line</p>
                 </div>
               </a>
               <a
-                href="mailto:info@medicareplus.com"
+                href="mailto:tejamedical09@gmail.com<"
                 className="flex items-start gap-3 text-background/80 hover:text-primary transition-colors group"
               >
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <p className="font-medium">info@medicareplus.com</p>
+                  <p className="font-medium">tejamedical09@gmail.com</p>
                   <p className="text-sm">Quick Response</p>
                 </div>
               </a>
@@ -160,7 +141,7 @@ const Footer = () => {
         <div className="border-t border-background/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-background/70 text-sm text-center md:text-left">
-              © {currentYear} MediCare Plus. All rights reserved. | ISO 9001:2015 Certified
+              © {currentYear} Teja Medical. All rights reserved. | 
             </p>
             <div className="flex flex-wrap gap-6 text-sm">
               <a

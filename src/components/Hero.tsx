@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin, Clock, TrendingUp, Award } from "lucide-react";
-import heroImage from "@/assets/hero-medical.jpg";
+import heroImage from "@/assets/MD.jpeg";
 
 const Hero = () => {
   return (
@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Background Image with Advanced Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={heroImage}
+          src="https://images.pexels.com/photos/8830478/pexels-photo-8830478.jpeg?_gl=1*1yn1u56*_ga*MTY5NTEyMzAxMi4xNzYyOTMxNTA4*_ga_8JE65Q40S6*czE3NjI5MzE1MDgkbzEkZzEkdDE3NjI5MzM2MDgkajgkbDAkaDA."
           alt="Professional Medical Shop in Hyderabad"
           className="w-full h-full object-cover"
         />
@@ -29,7 +29,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-3 mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
               <MapPin className="h-4 w-4" />
-              <span>Hyderabad's #1 Medical Shop</span>
+              <span>Anantapur's #1 Medical Shop</span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
               <Award className="h-4 w-4" />
@@ -63,9 +63,9 @@ const Hero = () => {
           </h1>
 
           {/* Enhanced Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-4 leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 max-w-2xl">
+          <p className="text-lg sm:text-xl text-black mb-4 font-bold leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 max-w-2xl">
             Experience healthcare excellence with quality medicines, expert consultation, 
-            and lightning-fast delivery across Hyderabad. Your health is our priority.
+            and lightning-fast delivery across Anantapur. Your health is our priority.
           </p>
 
           {/* Stats Bar */}
@@ -74,7 +74,7 @@ const Hero = () => {
               <TrendingUp className="h-5 w-5 text-accent" />
               <div>
                 <p className="text-2xl font-bold text-foreground">10,000+</p>
-                <p className="text-xs text-muted-foreground">Happy Customers</p>
+                <p className="text-l font-bold text-white">Happy Customers</p>
               </div>
             </div>
             <div className="h-12 w-px bg-border" />
@@ -82,7 +82,7 @@ const Hero = () => {
               <Clock className="h-5 w-5 text-accent" />
               <div>
                 <p className="text-2xl font-bold text-foreground">24/7</p>
-                <p className="text-xs text-muted-foreground">Available</p>
+                <p className="text-l font-bold text-white">Available</p>
               </div>
             </div>
             <div className="h-12 w-px bg-border hidden sm:block" />
@@ -90,24 +90,29 @@ const Hero = () => {
               <MapPin className="h-5 w-5 text-accent" />
               <div>
                 <p className="text-2xl font-bold text-foreground">5+</p>
-                <p className="text-xs text-muted-foreground">Locations</p>
+                <p className="text-l font-bold text-white">Locations</p>
               </div>
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-            <Button size="lg" className="text-base group relative overflow-hidden">
-              <span className="relative z-10 flex items-center">
-                <Phone className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Call Now - Free Consultation
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Button>
-            <Button size="lg" variant="outline" className="text-base group">
-              View 5000+ Products
+            <a href="tel:+919550140897">
+  <Button
+    size="lg"
+    className="text-base group relative overflow-hidden"
+  >
+    <span className="relative z-10 flex items-center">
+      <Phone className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+      Call Now
+    </span>
+    <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+  </Button>
+</a>
+            {/* <Button size="lg" variant="outline" className="text-base group">
+              View Services
               <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-            </Button>
+            </Button> */}
           </div>
 
           {/* Enhanced Info Cards */}
@@ -130,7 +135,7 @@ const Hero = () => {
                 30-Min Delivery
               </h3>
               <p className="text-sm text-muted-foreground">
-                Lightning-fast delivery across Hyderabad
+                Lightning-fast delivery within a 5 km radius.
               </p>
             </div>
 
@@ -150,7 +155,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" /> */}
     </section>
   );
 };

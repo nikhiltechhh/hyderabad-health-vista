@@ -1,4 +1,4 @@
-import { Pill, Stethoscope, Truck, Clock, FileText, HeadphonesIcon } from "lucide-react";
+import { Pill, Cross, Truck, Clock, FileText, HeadphonesIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Services = () => {
@@ -10,11 +10,13 @@ const Services = () => {
       color: "primary",
     },
     {
-      icon: Stethoscope,
-      title: "Free Consultation",
-      description: "Talk to our qualified pharmacists for expert advice on medications, dosages, and health concerns.",
+      icon: Cross, // better suited for a medical store
+      title: "Surgical Items",
+      description:
+        "We stock a wide range of essential surgical and medical supplies for home care and clinical use.",
       color: "accent",
     },
+
     {
       icon: Truck,
       title: "Home Delivery",
@@ -99,14 +101,20 @@ const Services = () => {
             Our emergency service is available 24/7. Call us now or place an order online for urgent medication delivery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="gap-2">
+            {/* <Button size="lg" variant="secondary" className="gap-2">
               <Clock className="h-5 w-5" />
               Call Emergency Line
-            </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary gap-2">
+            </Button> */}
+           <a href="tel:+919550140897">
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary gap-2"
+            >
               <Truck className="h-5 w-5" />
               Order Medicine Now
             </Button>
+          </a>
           </div>
         </div>
       </div>

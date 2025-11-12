@@ -1,7 +1,42 @@
-import { Heart, Activity, Thermometer, Brain, Eye, Bone, Plus, Pill } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Heart,
+  Activity,
+  Thermometer,
+  Brain,
+  Eye,
+  Bone,
+  Plus,
+  ShoppingCart,
+  Minus,
+  X,
+  Send,
+  Trash2,
+  Package,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const Products = () => {
+export default function Index() {
+  const navigate = useNavigate();
+  const [cart, setCart] = useState<any[]>([]);
+  const [showCart, setShowCart] = useState(false);
+  const [animateCart, setAnimateCart] = useState(false);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const savedCart = localStorage.getItem("pharmacyCart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("pharmacyCart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Category data
   const categories = [
     {
       icon: Heart,
@@ -53,75 +88,166 @@ const Products = () => {
     },
   ];
 
+  // Featured products
   const featuredProducts = [
     {
-      name: "Vitamin D3 Capsules",
-      brand: "HealthCare Plus",
-      price: "₹299",
-      originalPrice: "₹450",
-      discount: "33% OFF",
+      id: "1",
+      name: "Asthalin Inhaler",
+      brand: "Cipla",
+      price: 85,
+      originalPrice: 100,
+      discount: "15% OFF",
       inStock: true,
+      image: "https://i.ibb.co/5x52kcHP/asthalin.jpg",
     },
     {
-      name: "Omega-3 Fish Oil",
-      brand: "NutriLife",
-      price: "₹699",
-      originalPrice: "₹999",
-      discount: "30% OFF",
+      id: "2",
+      name: "Telvas 40mg Tablet",
+      brand: "Aristo",
+      price: 85,
+      originalPrice: 100,
+      discount: "15% OFF",
       inStock: true,
+      image: "https://i.ibb.co/ynznPjsh/telvas.webp",
     },
     {
-      name: "Multivitamin Tablets",
-      brand: "VitalBoost",
-      price: "₹399",
-      originalPrice: "₹599",
-      discount: "33% OFF",
+      id: "3",
+      name: "Ecosprin GOLD 20",
+      brand: "Rx",
+      price: 165,
+      originalPrice: 195,
+      discount: "15% OFF",
       inStock: true,
+      image: "http://i.ibb.co/DfgPvXGq/ecosprin.jpg",
     },
     {
-      name: "Calcium + Magnesium",
-      brand: "BoneStrong",
-      price: "₹549",
-      originalPrice: "₹799",
-      discount: "31% OFF",
+      id: "4",
+      name: "Zerodol-P Tablet",
+      brand: "ipca",
+      price: 66,
+      originalPrice: 77,
+      discount: "15% OFF",
       inStock: true,
+      image: "https://i.ibb.co/KJQQdXt/zerodol.jpg",
     },
   ];
 
+  // Cart functions
+  const addToCart = (product: any) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+
+    // Animate cart icon
+    setAnimateCart(true);
+    setTimeout(() => setAnimateCart(false), 600);
+  };
+
+  const updateQuantity = (productId: string, change: number) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) => {
+          if (item.id === productId) {
+            const newQuantity = item.quantity + change;
+            return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const removeFromCart = (productId: string) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  const getCartItemQuantity = (productId: string) => {
+    const item = cart.find((item) => item.id === productId);
+    return item ? item.quantity : 0;
+  };
+
+  const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0);
+  const getTotalPrice = () =>
+    cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const clearCart = () => {
+    if (window.confirm("Are you sure you want to clear the cart?")) {
+      setCart([]);
+      setShowCart(false);
+    }
+  };
+
+  const sendToWhatsApp = () => {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    let message = "🛍️ Teja Medical Order\n\nOrder Summary:\n\n";
+    cart.forEach((item, index) => {
+      message += `${index + 1}. ${item.name}\n`;
+      message += `   Brand: ${item.brand}\n`;
+      message += `   Qty: ${item.quantity}\n`;
+      message += `   Price: ₹${item.price} × ${item.quantity} = ₹${
+        item.price * item.quantity
+      }\n\n`;
+    });
+    message += `Total Items: ${getTotalItems()}\nTotal: ₹${getTotalPrice()}\n\nThank you!`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/919550140897?text=${encodedMessage}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
-    <section id="products" className="py-20 md:py-32 bg-background">
+    <section
+      id="products"
+      className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-background to-accent/5 relative"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-4">
-            Our Products
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-sm font-semibold mb-6 animate-pulse">
+            <Package className="h-4 w-4 text-primary" />
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Our Products
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Browse Our Extensive Catalog
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
+            Browse Our Extensive{" "}
+            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Medicine Catalog
+            </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Over 5,000+ genuine medicines and healthcare products from trusted brands at competitive prices.
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            Over 5,000+ genuine medicines and healthcare products from trusted
+            brands at competitive prices.
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
+        {/* Categories */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-20">
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
               <div
                 key={index}
-                className={`group bg-gradient-to-br ${category.gradient} border border-border rounded-xl p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer`}
+                className={`group bg-gradient-to-br ${category.gradient} border-2 border-border/50 rounded-2xl p-6 text-center hover:-translate-y-2 hover:border-primary/30 transition-all cursor-pointer`}
               >
-                <div className="flex justify-center mb-4">
-                  <div className="bg-background rounded-full p-4 group-hover:scale-110 transition-transform">
-                    <Icon className={`h-8 w-8 ${category.iconColor}`} />
-                  </div>
+                <div className="bg-background/80 p-4 rounded-2xl mb-4 inline-block">
+                  <Icon className={`h-8 w-8 ${category.iconColor}`} />
                 </div>
-                <h3 className="font-bold text-foreground mb-1 text-sm">
+                <h3 className="font-bold text-foreground text-sm mb-1">
                   {category.name}
                 </h3>
-                <p className="text-xs text-primary font-medium mb-1">
+                <p className="text-xs text-primary font-semibold mb-1">
                   {category.products}
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -134,84 +260,202 @@ const Products = () => {
 
         {/* Featured Products */}
         <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-              Featured Products
-            </h3>
-            <Button variant="outline">View All Products →</Button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
+            <div>
+              <h3 className="text-3xl font-bold text-foreground mb-2">
+                Featured Products
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Handpicked bestsellers for your health needs
+              </p>
+            </div>
+
+            {/* View All Products Button */}
+            <Button
+              variant="outline"
+              className="text-sm md:text-base group hover:bg-primary hover:text-primary-foreground transition-all"
+              onClick={() => navigate("/all-products")}
+            >
+              View All Products
+              <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">
+                →
+              </span>
+            </Button>
           </div>
 
+          {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product, index) => (
-              <div
-                key={index}
-                className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                {/* Product Image Placeholder */}
-                <div className="relative h-48 bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center">
-                  <Pill className="h-16 w-16 text-primary/20" />
-                  {product.discount && (
-                    <div className="absolute top-3 right-3 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-1 rounded">
-                      {product.discount}
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-5">
-                  <p className="text-xs text-muted-foreground mb-1">
-                    {product.brand}
-                  </p>
-                  <h4 className="font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {product.name}
-                  </h4>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl font-bold text-foreground">
-                      {product.price}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">
-                        {product.originalPrice}
-                      </span>
+            {featuredProducts.map((product) => {
+              const quantity = getCartItemQuantity(product.id);
+              return (
+                <div
+                  key={product.id}
+                  className="group bg-card/50 border-2 border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 transition-all"
+                >
+                  <div className="relative h-48 bg-gradient-to-br from-primary/5 via-accent/5 to-background">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {product.discount && (
+                      <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                        {product.discount}
+                      </div>
                     )}
                   </div>
-
-                  <Button className="w-full gap-2" size="sm">
-                    <Plus className="h-4 w-4" />
-                    Add to Cart
-                  </Button>
-
-                  {product.inStock && (
-                    <p className="text-xs text-accent text-center mt-2">
-                      ✓ In Stock - Fast Delivery
+                  <div className="p-5">
+                    <p className="text-xs text-primary/70 font-semibold mb-1 uppercase">
+                      {product.brand}
                     </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                    <h4 className="font-bold text-base mb-2 text-foreground">
+                      {product.name}
+                    </h4>
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="text-2xl font-bold text-primary">
+                        ₹{product.price}
+                      </span>
+                      <span className="text-sm text-muted-foreground line-through">
+                        ₹{product.originalPrice}
+                      </span>
+                    </div>
 
-        {/* Bottom CTA */}
-        <div className="bg-muted/50 border border-border rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-            Can't Find What You're Looking For?
-          </h3>
-          <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Upload your prescription or call us directly. Our pharmacists will help you find the right medication.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2">
-              Upload Prescription
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2">
-              Contact Pharmacist
-            </Button>
+                    {quantity === 0 ? (
+                      <Button
+                        className="w-full gap-2"
+                        size="lg"
+                        onClick={() => addToCart(product)}
+                      >
+                        <Plus className="h-4 w-4" /> Add to Cart
+                      </Button>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => updateQuantity(product.id, -1)}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </Button>
+                        <span className="font-bold text-lg w-8 text-center">
+                          {quantity}
+                        </span>
+                        <Button
+                          size="icon"
+                          onClick={() => updateQuantity(product.id, 1)}
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {/* Floating Cart */}
+      {getTotalItems() > 0 && (
+        <div className="fixed bottom-28 right-7 z-50">
+          <Button
+            className={`rounded-full w-16 h-16 shadow-xl relative bg-gradient-to-r from-primary to-accent transition-all ${
+              animateCart ? "scale-110" : "hover:scale-105"
+            }`}
+            onClick={() => setShowCart(true)}
+          >
+            <ShoppingCart className="h-8 w-8" />
+            <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              {getTotalItems()}
+            </span>
+          </Button>
+        </div>
+      )}
+
+      {/* Cart Modal */}
+      {showCart && (
+        <div
+          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowCart(false)}
+        >
+          <div
+            className="bg-background w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b">
+              <h3 className="text-2xl font-bold">Shopping Cart</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowCart(false)}
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+
+            {/* Cart Items */}
+            <div className="p-6 max-h-[60vh] overflow-y-auto">
+              {cart.length === 0 ? (
+                <p className="text-center text-muted-foreground py-10">
+                  Your cart is empty.
+                </p>
+              ) : (
+                cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between border-b py-4"
+                  >
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div>
+                        <p className="font-bold">{item.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          ₹{item.price} × {item.quantity}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      <Trash2 className="h-5 w-5 text-destructive" />
+                    </Button>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Footer */}
+            {cart.length > 0 && (
+              <div className="p-6 border-t space-y-3">
+                <p className="text-lg font-bold">
+                  Total: ₹{getTotalPrice()}
+                </p>
+                <Button
+                  className="w-full bg-green-600 hover:bg-green-700"
+                  onClick={sendToWhatsApp}
+                >
+                  <Send className="h-4 w-4 mr-2" /> Proceed to WhatsApp Order
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full hover:text-destructive hover:border-destructive"
+                  onClick={clearCart}
+                >
+                  <Trash2 className="h-4 w-4 mr-2" /> Clear Cart
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
-};
-
-export default Products;
+}
