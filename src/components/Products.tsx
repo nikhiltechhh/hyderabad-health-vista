@@ -23,7 +23,6 @@ export default function Index() {
   const [showCart, setShowCart] = useState(false);
   const [animateCart, setAnimateCart] = useState(false);
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem("pharmacyCart");
     if (savedCart) {
@@ -31,12 +30,10 @@ export default function Index() {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("pharmacyCart", JSON.stringify(cart));
   }, [cart]);
 
-  // Category data
   const categories = [
     {
       icon: Heart,
@@ -88,51 +85,33 @@ export default function Index() {
     },
   ];
 
-  // Featured products
   const featuredProducts = [
     {
       id: "1",
       name: "Asthalin Inhaler",
       brand: "Cipla",
-      price: 85,
-      originalPrice: 100,
-      discount: "15% OFF",
-      inStock: true,
       image: "https://i.ibb.co/5x52kcHP/asthalin.jpg",
     },
     {
       id: "2",
       name: "Telvas 40mg Tablet",
       brand: "Aristo",
-      price: 85,
-      originalPrice: 100,
-      discount: "15% OFF",
-      inStock: true,
       image: "https://i.ibb.co/ynznPjsh/telvas.webp",
     },
     {
       id: "3",
       name: "Ecosprin GOLD 20",
       brand: "Rx",
-      price: 165,
-      originalPrice: 195,
-      discount: "15% OFF",
-      inStock: true,
       image: "http://i.ibb.co/DfgPvXGq/ecosprin.jpg",
     },
     {
       id: "4",
       name: "Zerodol-P Tablet",
       brand: "ipca",
-      price: 66,
-      originalPrice: 77,
-      discount: "15% OFF",
-      inStock: true,
       image: "https://i.ibb.co/KJQQdXt/zerodol.jpg",
     },
   ];
 
-  // Cart functions
   const addToCart = (product: any) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
@@ -146,7 +125,6 @@ export default function Index() {
       return [...prevCart, { ...product, quantity: 1 }];
     });
 
-    // Animate cart icon
     setAnimateCart(true);
     setTimeout(() => setAnimateCart(false), 600);
   };
@@ -175,8 +153,6 @@ export default function Index() {
   };
 
   const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0);
-  const getTotalPrice = () =>
-    cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const clearCart = () => {
     if (window.confirm("Are you sure you want to clear the cart?")) {
@@ -195,12 +171,10 @@ export default function Index() {
     cart.forEach((item, index) => {
       message += `${index + 1}. ${item.name}\n`;
       message += `   Brand: ${item.brand}\n`;
-      message += `   Qty: ${item.quantity}\n`;
-      message += `   Price: ₹${item.price} × ${item.quantity} = ₹${
-        item.price * item.quantity
-      }\n\n`;
+      message += `   Qty: ${item.quantity}\n\n`;
     });
-    message += `Total Items: ${getTotalItems()}\nTotal: ₹${getTotalPrice()}\n\nThank you!`;
+    message += `Total Items: ${getTotalItems()}\n\nThank you!`;
+
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/919550140897?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
@@ -270,7 +244,6 @@ export default function Index() {
               </p>
             </div>
 
-            {/* View All Products Button */}
             <Button
               variant="outline"
               className="text-sm md:text-base group hover:bg-primary hover:text-primary-foreground transition-all"
@@ -283,7 +256,6 @@ export default function Index() {
             </Button>
           </div>
 
-          {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product) => {
               const quantity = getCartItemQuantity(product.id);
@@ -298,27 +270,14 @@ export default function Index() {
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
-                    {product.discount && (
-                      <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                        {product.discount}
-                      </div>
-                    )}
                   </div>
                   <div className="p-5">
                     <p className="text-xs text-primary/70 font-semibold mb-1 uppercase">
                       {product.brand}
                     </p>
-                    <h4 className="font-bold text-base mb-2 text-foreground">
+                    <h4 className="font-bold text-base mb-3 text-foreground">
                       {product.name}
                     </h4>
-                    <div className="flex items-baseline gap-2 mb-3">
-                      <span className="text-2xl font-bold text-primary">
-                        ₹{product.price}
-                      </span>
-                      <span className="text-sm text-muted-foreground line-through">
-                        ₹{product.originalPrice}
-                      </span>
-                    </div>
 
                     {quantity === 0 ? (
                       <Button
@@ -383,7 +342,6 @@ export default function Index() {
             className="bg-background w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
             <div className="flex items-center justify-between p-6 border-b">
               <h3 className="text-2xl font-bold">Shopping Cart</h3>
               <Button
@@ -395,7 +353,6 @@ export default function Index() {
               </Button>
             </div>
 
-            {/* Cart Items */}
             <div className="p-6 max-h-[60vh] overflow-y-auto">
               {cart.length === 0 ? (
                 <p className="text-center text-muted-foreground py-10">
@@ -416,8 +373,9 @@ export default function Index() {
                       <div>
                         <p className="font-bold">{item.name}</p>
                         <p className="text-sm text-muted-foreground">
-                          ₹{item.price} × {item.quantity}
+                          Brand: {item.brand}
                         </p>
+                        <p className="text-sm">Qty: {item.quantity}</p>
                       </div>
                     </div>
                     <Button
@@ -432,12 +390,8 @@ export default function Index() {
               )}
             </div>
 
-            {/* Footer */}
             {cart.length > 0 && (
               <div className="p-6 border-t space-y-3">
-                <p className="text-lg font-bold">
-                  Total: ₹{getTotalPrice()}
-                </p>
                 <Button
                   className="w-full bg-green-600 hover:bg-green-700"
                   onClick={sendToWhatsApp}
