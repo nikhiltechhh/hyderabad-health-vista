@@ -4,7 +4,7 @@ import Services from "@/components/Services";
 import Products from "@/components/Products";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Contact from "@/components/Contact";
-import WhatsAppFloat from "@/components/WhatsappFloat";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Footer from "@/components/Footer";
 
 const Index = () => {
